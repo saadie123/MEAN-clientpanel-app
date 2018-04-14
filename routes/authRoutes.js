@@ -87,7 +87,7 @@ router.post('/login', passport.authenticate('local', {
 }));
 
 router.post('/register', async (req, res) => {
-    const user = await User.findOne({email: req.email});
+    const user = await User.findOne({email: req.body.email});
     if(!user){
         bcrypt.genSalt(10, (err, salt) => {
             bcrypt.hash(req.body.password, salt, async (err, hash) => {
