@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 
 const userSchema = new mongoose.Schema({
-    name:{
+    name: {
         type: String,
         required: true
     },
@@ -10,8 +10,8 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
-        validate:{
-            validator(value){
+        validate: {
+            validator(value) {
                 return validator.isEmail(value)
             },
             message: "{VALUE} is not a valid Email address"
@@ -24,4 +24,4 @@ const userSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('users',userSchema);
+module.exports = mongoose.model('users', userSchema);
