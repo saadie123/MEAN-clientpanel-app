@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -10,6 +11,7 @@ mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://saadie:saadie@ds059306.mlab.com:59306/clientpanel');
 
 const app = express();
+app.use(express.static(path.join(__dirname,'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false
