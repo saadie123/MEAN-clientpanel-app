@@ -33,7 +33,7 @@ router.get('/success', (req, res) => {
     res.status(200).send({user, message: 'You have successfully logged in!', success: true});
 });
 router.get('/fail', (req, res) => {
-    res.status(400).send({message:'Invalid username or password!', success: false});
+    res.status(400).send({message:'Invalid email or password!', success: false});
 });
 
 passport.use(new GoogleStrategy({
@@ -59,10 +59,9 @@ passport.use(new GoogleStrategy({
 router.get('/google', passport.authenticate('google',{
     scope: ['profile', 'email']
 }));
-router.get('/callback', passport.authenticate('google',{
-    failureRedirect: '/auth/fail',
-    successRedirect: '/auth/success'
-}));
+router.get('/callback', passport.authenticate('google'), (req, res)=>{
+    res.redirect('/'); 
+});
 
 passport.use(new LocalStrategy({ usernameField: 'email' }, async (email, password, done)=>{
     const user = await User.findOne({email});
@@ -101,7 +100,7 @@ router.post('/register', async (req, res) => {
                         password: hash
                     });
                     const newUser = await user.save();
-                    res.status(201).send({ user:newUser, message: 'Your account has been registered successfully!', success:true })
+                    res.status(201).send({ user:newUser, message: 'You have registered successfully. Please login now!', success:true })
                 } catch (error) {
                     return res.status(400).send({ error, success: false });
                 }
