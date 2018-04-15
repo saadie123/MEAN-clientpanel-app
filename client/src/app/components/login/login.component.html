@@ -23,7 +23,8 @@
                 <small *ngIf="password.errors.minlength" class="form-text text-danger">Password cannot be less than 8 characters!</small>              
               </div>
           </div>
-          <button type="submit" [disabled]="!f.valid" class="btn btn-primary">Login</button>
+          <button type="submit" [disabled]="!f.valid" class="btn btn-primary mb-3">Login</button>
+          <a href="/auth/google" class="btn btn-danger btn-block">Login with Google</a>
         </form>
   </div>
 </div>

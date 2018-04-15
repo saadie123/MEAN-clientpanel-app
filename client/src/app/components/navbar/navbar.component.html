@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-success">
-  <a class="navbar-brand" href="#">Navbar</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" routerLink="/">Client Panel</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -7,7 +7,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" routerLink="/">Home</a>
       </li>
       <li class="nav-item">
         <a class="nav-link disabled" href="#">Disabled</a>
@@ -18,7 +18,7 @@
         <a class="nav-link" routerLink="/login">{{user.name}}</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" (click)="logout()" href="#">Logout</a>
+        <a class="nav-link" (click)="logout()" href="javascript:void()">Logout</a>
       </li>
     </ul>
     <ul *ngIf="!user" class="navbar-nav ml-auto">

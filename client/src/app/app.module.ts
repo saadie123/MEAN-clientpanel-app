@@ -2,7 +2,7 @@ import { AuthService } from './services/auth.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-
+import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -21,16 +21,19 @@ const routes: Routes = [
     AppComponent,
     NavbarComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
+    SnotifyModule,
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot(routes)
   ],
   providers: [
-    AuthService
+    AuthService,
+    { provide: 'SnotifyToastConfig', useValue: ToastDefaults},
+    SnotifyService
   ],
   bootstrap: [AppComponent]
 })

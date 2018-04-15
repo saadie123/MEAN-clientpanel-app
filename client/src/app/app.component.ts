@@ -13,8 +13,6 @@ export class AppComponent implements OnInit {
     
   }
   ngOnInit(){
-    this.auth.autoLogin().subscribe((response:any)=>{
-      this.user = response.user;
-    })
+    this.auth.autoLogin()
   }
 }

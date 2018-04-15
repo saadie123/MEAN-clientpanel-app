@@ -1,3 +1,36 @@
-<p>
-  register works!
-</p>
+<div class="row justify-content-center">
+  <div class="col-sm-6">
+    <h1 class="mb-4">Register</h1>
+    <form #f="ngForm" (ngSubmit)="onRegister(f.value)">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input name="name" [(ngModel)]="registerForm.name" #name="ngModel" 
+        type="text" class="form-control" id="name"
+        placeholder="Enter you name" required>
+        <div *ngIf="name.invalid && name.touched">
+          <small *ngIf="name.errors.required" class="form-text text-danger">Name is required!</small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email address</label>
+        <input name="email" email [(ngModel)]="registerForm.email" #email="ngModel" type="email" class="form-control" id="email"
+          placeholder="Enter email" required>
+        <div *ngIf="email.invalid && email.touched">
+          <small *ngIf="email.errors.required" class="form-text text-danger">Email is required!</small>
+          <small *ngIf="email.errors.email" class="form-text text-danger">Please enter a valid email!</small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input name="password" [(ngModel)]="registerForm.password" #password="ngModel" type="password" class="form-control" id="password"
+          placeholder="Password" minlength="8" required>
+        <div *ngIf="password.invalid && password.touched">
+          <small *ngIf="password.errors.required" class="form-text text-danger">Password is required!</small>
+          <small *ngIf="password.errors.minlength" class="form-text text-danger">Password cannot be less than 8 characters!</small>
+        </div>
+      </div>
+      <button type="submit" [disabled]="!f.valid" class="btn btn-primary mb-3">Register</button>
+      <a href="/auth/google" class="btn btn-danger btn-block">Login with Google</a>
+    </form>
+  </div>
+</div>
