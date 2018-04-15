@@ -6,6 +6,7 @@ const session = require('express-session');
 const passport = require('passport');
 
 const authRoutes = require('./routes/authRoutes');
+const clientRoutes = require('./routes/clientRoutes');
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://saadie:saadie@ds059306.mlab.com:59306/clientpanel');
@@ -25,6 +26,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/auth', authRoutes);
+app.use('/api/clients', clientRoutes);
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
