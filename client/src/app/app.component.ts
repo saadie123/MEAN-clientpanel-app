@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { AuthService } from './services/auth.service';
+import { User } from './models/user';
 
 @Component({
   selector: 'app-root',
@@ -7,13 +8,13 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'app';
-  constructor(private http: HttpClient){
+  user: User;
+  constructor(private auth: AuthService){
     
   }
   ngOnInit(){
-    this.http.get('/auth/current-user').subscribe(response=>{
-      console.log(response);
+    this.auth.autoLogin().subscribe((response:any)=>{
+      this.user = response.user;
     })
   }
 }
