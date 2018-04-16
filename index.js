@@ -5,11 +5,12 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const passport = require('passport');
 
+const keys = require('./config/keys');
 const authRoutes = require('./routes/authRoutes');
 const clientRoutes = require('./routes/clientRoutes');
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://saadie:saadie@ds059306.mlab.com:59306/clientpanel');
+mongoose.connect(keys.mongodbURL);
 
 const app = express();
 app.use(express.static(path.join(__dirname,'public')));

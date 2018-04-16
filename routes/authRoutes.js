@@ -4,6 +4,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
+const keys = require('../config/keys');
 const User = require('../models/User');
 const router = express.Router();
 
@@ -37,8 +38,8 @@ router.get('/fail', (req, res) => {
 });
 
 passport.use(new GoogleStrategy({
-    clientID: '56463711653-itdchasipnpjigppigeqonu42urvdin3.apps.googleusercontent.com',
-    clientSecret: 'aUx3pqCstjWaSDCFI0Ju3DUO',
+    clientID: keys.googleClientID,
+    clientSecret: keys.googleClientSecret,
     callbackURL: '/auth/callback'
 }, async (accessToken, refreshToken, profile, done) => {
     try {

@@ -20,7 +20,7 @@ export class AuthService {
       this.user = response.user;
       this.snotify.success(response.message,"Success",{
         position: 'rightTop',
-        timeout: 5000
+        timeout: 3000
       });      
       this.router.navigate(['/']);
       this.onLogin.next(this.user);
@@ -45,7 +45,7 @@ export class AuthService {
       this.user  = undefined;
       this.snotify.success(response.message,"Success",{
         position: 'rightTop',
-        timeout: 5000
+        timeout: 3000
       });
       this.router.navigate(['/login']);      
       this.onLogout.next(true);
