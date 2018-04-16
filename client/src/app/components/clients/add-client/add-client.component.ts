@@ -1,3 +1,4 @@
+import { ClientService } from './../../../services/client.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-client.component.css']
 })
 export class AddClientComponent implements OnInit {
-
-  constructor() { }
+  clientForm = {
+    name: '',
+    email: '',
+    phone: null,
+    balance: null
+  }
+  constructor(private clientService:ClientService) { }
 
   ngOnInit() {
   }
 
+  onAddClient(form){
+    this.clientService.addClient(form);
+  }
 }

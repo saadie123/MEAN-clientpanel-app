@@ -31,7 +31,7 @@ router.get('/success', (req, res) => {
         name: req.user.name,
         email: req.user.email
     };
-    res.status(200).send({user, message: 'You have successfully logged in!', success: true});
+    res.status(200).send({user, message: 'You are successfully logged in!', success: true});
 });
 router.get('/fail', (req, res) => {
     res.status(400).send({message:'Invalid email or password!', success: false});
@@ -101,7 +101,7 @@ router.post('/register', async (req, res) => {
                         password: hash
                     });
                     const newUser = await user.save();
-                    res.status(201).send({ user:newUser, message: 'You have registered successfully. Please login now!', success:true })
+                    res.status(201).send({ user:newUser, message: 'You are registered successfully. Please login now!', success:true })
                 } catch (error) {
                     return res.status(400).send({ error, success: false });
                 }

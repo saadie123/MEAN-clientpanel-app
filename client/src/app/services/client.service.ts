@@ -8,4 +8,9 @@ export class ClientService {
   getClients(){
     return this.http.get('/api/clients');
   }
+  addClient(payload){
+    this.http.post('/api/clients',payload).subscribe(response=>{
+      console.log(response);
+    });
+  }
 }

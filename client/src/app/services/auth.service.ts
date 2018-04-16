@@ -3,6 +3,7 @@ import { User } from './../models/user';
 import { Injectable, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { SnotifyService } from 'ng-snotify';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class AuthService {
@@ -16,19 +17,35 @@ export class AuthService {
       email,
       password
     }
-    this.http.post('/auth/login',payload).subscribe((response:any)=>{
-      this.user = response.user;
-      this.snotify.success(response.message,"Success",{
-        position: 'rightTop',
-        timeout: 3000
-      });      
-      this.router.navigate(['/']);
-      this.onLogin.next(this.user);
-    },error=>{
-      this.snotify.error(error.error.message,"Error "+error.status,{
-        position: 'rightTop',
-        timeout: 3000
+    this.snotify.async('Logging In!',Observable.create(observer=>{
+      this.http.post('/auth/login',payload).subscribe((response:any)=>{  
+        this.user = response.user;
+        this.onLogin.next(this.user);
+        this.router.navigate(['/']);        
+        observer.next({
+            title: 'Success',
+            body: response.message,
+            config: {
+              closeOnClick: true,
+              timeout: 4000,
+              showProgressBar: true,
+              type: 'success'
+            }
+        })
+      },(error)=>{
+        observer.next({
+          title: 'Error',
+          body: error.error.message,
+          config: {
+            closeOnClick: true,
+            timeout: 4000,
+            showProgressBar: true,
+            type: 'error'
+          }
+        });
       });
+    }),{
+      position: 'rightTop'
     });
   }
   getUser(){
@@ -41,28 +58,53 @@ export class AuthService {
     });
   }
   logoutUser(){
-    this.http.get('/auth/logout').subscribe((response:any)=>{
-      this.user  = undefined;
-      this.snotify.success(response.message,"Success",{
-        position: 'rightTop',
-        timeout: 3000
+    this.snotify.async('Logging out!',Observable.create(observer=>{
+      this.http.get('/auth/logout').subscribe((response:any)=>{
+        observer.next({
+          title: 'Success',
+          body: response.message,
+          config: {
+            closeOnClick: true,
+            timeout: 4000,
+            showProgressBar: true,
+            type: 'success'
+          }
+        });
+        this.router.navigate(['/login']);      
+        this.onLogout.next(true);
       });
-      this.router.navigate(['/login']);      
-      this.onLogout.next(true);
+    }),{
+      position: 'rightTop'
     });
   }
   registerUser(payload){
-    this.http.post('/auth/register',payload).subscribe((response:any)=>{
-      this.snotify.success(response.message,"Success",{
-        position: 'rightTop',
-        timeout: 5000
+    this.snotify.async('Registering account!',Observable.create(observer=>{
+      this.http.post('/auth/register',payload).subscribe((response:any)=>{
+        this.router.navigate(['/login']);        
+        observer.next({
+          title: 'Success',
+          body: response.message,
+          config: {
+            closeOnClick: true,
+            timeout: 4000,
+            showProgressBar: true,
+            type: 'success'
+          }
+        })
+      },error=>{
+        observer.next({
+          title: 'Error',
+          body: error.error.message,
+          config: {
+            closeOnClick: true,
+            timeout: 4000,
+            showProgressBar: true,
+            type: 'error'
+          }
+        });
       });
-      this.router.navigate(['/login']);   
-    },error=>{
-      this.snotify.error(error.error.message,"Error "+error.status,{
-        position: 'rightTop',
-        timeout: 3000
-      });
-    })
+    }),{
+      position: 'rightTop'
+    });
   }
 }
