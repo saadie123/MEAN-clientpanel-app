@@ -32,8 +32,8 @@
             </div>
             <div class="form-group">
               <label for="balance">Balance</label>
-              <input name="balance" [(ngModel)]="clientForm.balance" #balance="ngModel" type="text" class="form-control" id="balance"
-                placeholder="Balance" required>
+              <input name="balance" [(ngModel)]="clientForm.balance" #balance="ngModel" type="number" class="form-control" id="balance"
+                placeholder="Balance" min="0" required>
               <div *ngIf="balance.invalid && balance.touched">
                 <small *ngIf="balance.errors.required" class="form-text text-danger">Balance is required!</small>
               </div>

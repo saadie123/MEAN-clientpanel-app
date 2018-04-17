@@ -1,3 +1,47 @@
-<p>
-  edit-client works!
-</p>
+<div class="row justify-content-center">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+          <h1 class="mb-4">Edit Client</h1>
+          <form #f="ngForm" (ngSubmit)="onEditClient(f.value)">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input name="name" [(ngModel)]="clientForm.name" #name="ngModel" 
+              type="text" class="form-control" id="name"
+              placeholder="Enter name" required>
+              <div *ngIf="name.invalid && name.touched">
+                <small *ngIf="name.errors.required" class="form-text text-danger">Name is required!</small>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="email">Email address</label>
+              <input name="email" email [(ngModel)]="clientForm.email" #email="ngModel" type="email" class="form-control" id="email"
+                placeholder="Enter email" required>
+              <div *ngIf="email.invalid && email.touched">
+                <small *ngIf="email.errors.required" class="form-text text-danger">Email is required!</small>
+                <small *ngIf="email.errors.email" class="form-text text-danger">Please enter a valid email!</small>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone</label>
+              <input name="phone" [(ngModel)]="clientForm.phone" #phone="ngModel" type="text" class="form-control" id="phone"
+                placeholder="Phone number" required>
+              <div *ngIf="phone.invalid && phone.touched">
+                <small *ngIf="phone.errors.required" class="form-text text-danger">Phone number is required!</small>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="balance">Balance</label>
+              <input name="balance" [(ngModel)]="clientForm.balance" #balance="ngModel" type="number" class="form-control" id="balance"
+                placeholder="Balance" min="0" required>
+              <div *ngIf="balance.invalid && balance.touched">
+                <small *ngIf="balance.errors.required" class="form-text text-danger">Balance is required!</small>
+              </div>
+            </div>
+            <button type="submit" [disabled]="!f.valid" class="btn btn-primary">Save</button>
+            <a [routerLink]="['/clients/details',id]" class="btn btn-secondary">Cancel</a>
+          </form>
+      </div>
+    </div>
+  </div>
+</div>

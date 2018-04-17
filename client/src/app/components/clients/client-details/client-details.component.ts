@@ -1,6 +1,7 @@
+import { Subscription } from 'rxjs/Subscription';
 import { ClientService } from './../../../services/client.service';
 import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Client } from '../../../models/client';
 
 @Component({
@@ -8,7 +9,8 @@ import { Client } from '../../../models/client';
   templateUrl: './client-details.component.html',
   styleUrls: ['./client-details.component.css']
 })
-export class ClientDetailsComponent implements OnInit {
+export class ClientDetailsComponent implements OnInit, OnDestroy {
+  subscription:Subscription;
   id:string;
   client:Client;
   hasBalance:boolean = false;
@@ -17,7 +19,7 @@ export class ClientDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
-    this.clientService.getClient(this.id).subscribe((response:any)=>{
+    this.subscription = this.clientService.getClient(this.id).subscribe((response:any)=>{
       this.client = response.client;
       if(this.client.balance > 0){
         this.hasBalance = true;
@@ -32,5 +34,11 @@ export class ClientDetailsComponent implements OnInit {
     }
     this.clientService.updateBalance(id, this.client.balance);
   }
+  onDeleteClient(id){
+    this.clientService.deleteClient(id);
+  }
 
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
+  }
 }
