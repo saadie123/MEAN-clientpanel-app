@@ -23,9 +23,9 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
 const routes: Routes = [
   { path: '', component: HomeComponent},
   { path: 'dashboard', component: DashboardComponent ,canActivate: [AuthGuard]},
-  { path: 'clients/details/:id', component: ClientDetailsComponent},
-  { path: 'clients/new', component: AddClientComponent},
-  { path: 'clients/edit/:id', component: EditClientComponent },
+  { path: 'clients/details/:id', component: ClientDetailsComponent, canActivate: [AuthGuard]},
+  { path: 'clients/new', component: AddClientComponent, canActivate: [AuthGuard]},
+  { path: 'clients/edit/:id', component: EditClientComponent, canActivate: [AuthGuard]},
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent}
 ]
