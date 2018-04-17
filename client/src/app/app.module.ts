@@ -1,3 +1,4 @@
+import { AuthGuard } from './guards/auth.guard';
 import { ClientService } from './services/client.service';
 import { AuthService } from './services/auth.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -19,7 +20,7 @@ import { ClientDetailsComponent } from './components/clients/client-details/clie
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full'},
-  { path: 'dashboard', component: DashboardComponent},
+  { path: 'dashboard', component: DashboardComponent ,canActivate: [AuthGuard]},
   { path: 'clients/details/:id', component: ClientDetailsComponent},
   { path: 'clients/new', component: AddClientComponent},
   { path: 'clients/edit/:id', component: EditClientComponent },
@@ -50,7 +51,8 @@ const routes: Routes = [
     AuthService,
     ClientService,
     { provide: 'SnotifyToastConfig', useValue: ToastDefaults},
-    SnotifyService
+    SnotifyService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

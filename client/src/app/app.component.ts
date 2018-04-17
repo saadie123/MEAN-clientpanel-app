@@ -8,11 +8,10 @@ import { User } from './models/user';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  user: User;
   constructor(private auth: AuthService){
     
   }
   ngOnInit(){
-    this.auth.autoLogin()
+    this.auth.autoLogin();
   }
 }

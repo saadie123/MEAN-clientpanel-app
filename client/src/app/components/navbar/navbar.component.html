@@ -12,7 +12,7 @@
     </ul>
     <ul *ngIf="user" class="navbar-nav ml-auto">
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" routerLink="/login">{{user.name}}</a>
+        <a class="nav-link" routerLink="/">{{user.name}}</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" (click)="logout()" href="javascript:void()">Logout</a>

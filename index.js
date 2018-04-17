@@ -29,6 +29,10 @@ app.use(passport.session());
 app.use('/auth', authRoutes);
 app.use('/api/clients', clientRoutes);
 
+app.use('*',(req,res)=>{
+    res.redirect('/');
+});
+
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
