@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "This is a MEAN stack client panel application which allows users to manage client revenues.",
   "main": "index.js",
+  "engines": {
+    "node": "8.9.4"
+  },
   "scripts": {
     "start": "node index.js",
     "server": "nodemon index.js",
