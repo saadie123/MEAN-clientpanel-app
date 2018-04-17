@@ -9,13 +9,16 @@ import { Subscription } from 'rxjs/Subscription';
   styleUrls: ['./clients.component.css']
 })
 export class ClientsComponent implements OnInit, OnDestroy {
+  clientsLoading:boolean = false;
   clients:Client[] = [];
   totalOwed: number;
   constructor(private clientService: ClientService) { }
   subscription:Subscription;
   ngOnInit() {
+    this.clientsLoading = true;
     this.subscription = this.clientService.getClients().subscribe((response:any)=>{
       this.clients = response.clients;
+      this.clientsLoading = false;
       this.getTotal();
     });
   }

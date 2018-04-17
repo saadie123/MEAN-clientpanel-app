@@ -10,6 +10,7 @@ import { Client } from '../../../models/client';
   styleUrls: ['./client-details.component.css']
 })
 export class ClientDetailsComponent implements OnInit, OnDestroy {
+  clientLoading:boolean = false;
   subscription:Subscription;
   id:string;
   client:Client;
@@ -19,8 +20,10 @@ export class ClientDetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
+    this.clientLoading = true;
     this.subscription = this.clientService.getClient(this.id).subscribe((response:any)=>{
       this.client = response.client;
+      this.clientLoading = false;
       if(this.client.balance > 0){
         this.hasBalance = true;
       }

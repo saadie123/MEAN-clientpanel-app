@@ -17,9 +17,11 @@ import { ClientsComponent } from './components/clients/clients.component';
 import { AddClientComponent } from './components/clients/add-client/add-client.component';
 import { EditClientComponent } from './components/clients/edit-client/edit-client.component';
 import { ClientDetailsComponent } from './components/clients/client-details/client-details.component';
+import { HomeComponent } from './components/home/home.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full'},
+  { path: '', component: HomeComponent},
   { path: 'dashboard', component: DashboardComponent ,canActivate: [AuthGuard]},
   { path: 'clients/details/:id', component: ClientDetailsComponent},
   { path: 'clients/new', component: AddClientComponent},
@@ -39,6 +41,8 @@ const routes: Routes = [
     AddClientComponent,
     EditClientComponent,
     ClientDetailsComponent,
+    HomeComponent,
+    SpinnerComponent,
   ],
   imports: [
     BrowserModule,

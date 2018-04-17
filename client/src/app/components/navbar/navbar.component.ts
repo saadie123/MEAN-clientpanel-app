@@ -15,7 +15,6 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
    this.auth.onLogin.subscribe(user=>{
      this.user = user;
-     this.router.navigate(['/']);
    });
   }
 

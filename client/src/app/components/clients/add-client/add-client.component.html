@@ -38,7 +38,8 @@
                 <small *ngIf="balance.errors.required" class="form-text text-danger">Balance is required!</small>
               </div>
             </div>
-            <button type="submit" [disabled]="!f.valid" class="btn btn-primary mb-3">Add</button>
+            <button type="submit" [disabled]="!f.valid" class="btn btn-primary">Add</button>
+            <a routerLink="/dashboard" class="btn btn-secondary">Cancel</a>
           </form>
       </div>
     </div>

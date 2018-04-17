@@ -21,7 +21,7 @@ export class AuthService {
       this.http.post('/auth/login',payload).subscribe((response:any)=>{  
         this.user = response.user;
         this.onLogin.next(this.user);
-        this.router.navigate(['/']);     
+        this.router.navigate(['/dashboard']);     
         observer.next({
             title: 'Success',
             body: response.message,
