@@ -18,7 +18,7 @@ const clientSchema = new mongoose.Schema({
         }
     },
     phone: {
-        type: Number,
+        type: String,
         required: true
     },
     balance: {

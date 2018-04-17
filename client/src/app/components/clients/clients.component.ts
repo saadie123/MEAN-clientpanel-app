@@ -1,19 +1,20 @@
 import { ClientService } from './../../services/client.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Client } from '../../models/client';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-clients',
   templateUrl: './clients.component.html',
   styleUrls: ['./clients.component.css']
 })
-export class ClientsComponent implements OnInit {
+export class ClientsComponent implements OnInit, OnDestroy {
   clients:Client[] = [];
   totalOwed: number;
   constructor(private clientService: ClientService) { }
-
+  subscription:Subscription;
   ngOnInit() {
-    this.clientService.getClients().subscribe((response:any)=>{
+    this.subscription = this.clientService.getClients().subscribe((response:any)=>{
       this.clients = response.clients;
       this.getTotal();
     });
@@ -25,5 +26,9 @@ export class ClientsComponent implements OnInit {
       total += client.balance;
     }
     this.totalOwed = total;
+  }
+
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
   }
 }

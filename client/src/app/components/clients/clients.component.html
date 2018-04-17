@@ -9,20 +9,20 @@
 <table *ngIf="clients?.length > 0 else noClients" class="table table-striped">
   <thead class="thead-dark">
     <tr>
+      <th>ID</th>
       <th>Name</th>
       <th>Email</th>
-      <th>Phone</th>
       <th>Balance</th>
       <th></th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let client of clients">
+      <td>{{client._id}}</td>
       <td>{{client.name}}</td>
       <td>{{client.email}}</td>
-      <td>{{client.phone}}</td>
       <td>{{client.balance | currency:"USD":true}}</td>
-      <td><a routerLink="/clients/details" class="btn btn-secondary btn-sm"><i class="fa fa-arrow-circle-o-right"></i> Details</a></td>
+      <td><a [routerLink]="['/clients/details',client._id]" class="btn btn-secondary btn-sm"><i class="fa fa-arrow-circle-o-right"></i> Details</a></td>
     </tr>
   </tbody>
 </table>

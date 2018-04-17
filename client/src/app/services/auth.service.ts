@@ -17,7 +17,7 @@ export class AuthService {
       email,
       password
     }
-    this.snotify.async('Logging In!',Observable.create(observer=>{
+    this.snotify.async('Logging in...',Observable.create(observer=>{
       this.http.post('/auth/login',payload).subscribe((response:any)=>{  
         this.user = response.user;
         this.onLogin.next(this.user);
@@ -58,7 +58,7 @@ export class AuthService {
     });
   }
   logoutUser(){
-    this.snotify.async('Logging out!',Observable.create(observer=>{
+    this.snotify.async('Logging out...',Observable.create(observer=>{
       this.http.get('/auth/logout').subscribe((response:any)=>{
         observer.next({
           title: 'Success',
@@ -78,7 +78,7 @@ export class AuthService {
     });
   }
   registerUser(payload){
-    this.snotify.async('Registering account!',Observable.create(observer=>{
+    this.snotify.async('Registering account...',Observable.create(observer=>{
       this.http.post('/auth/register',payload).subscribe((response:any)=>{
         this.router.navigate(['/login']);        
         observer.next({
