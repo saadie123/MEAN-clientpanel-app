@@ -1,13 +1,21 @@
 import { Subscription } from 'rxjs/Subscription';
 import { ClientService } from './../../../services/client.service';
 import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, trigger, transition, style, animate } from '@angular/core';
 import { Client } from '../../../models/client';
 
 @Component({
   selector: 'app-client-details',
   templateUrl: './client-details.component.html',
-  styleUrls: ['./client-details.component.css']
+  styleUrls: ['./client-details.component.css'],
+  animations: [
+    trigger('fadeIn',[
+      transition('void => *', [
+        style({transform: 'translateX(-20px)',opacity:0}),
+        animate(500,style({transform:'translateX(0)',opacity:1}))
+      ])
+    ])
+  ]
 })
 export class ClientDetailsComponent implements OnInit, OnDestroy {
   clientLoading:boolean = false;

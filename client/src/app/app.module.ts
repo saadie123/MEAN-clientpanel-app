@@ -1,6 +1,7 @@
 import { AuthGuard } from './guards/auth.guard';
 import { ClientService } from './services/client.service';
 import { AuthService } from './services/auth.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -49,6 +50,7 @@ const routes: Routes = [
     SnotifyModule,
     FormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot(routes)
   ],
   providers: [
