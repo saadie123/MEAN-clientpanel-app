@@ -4,6 +4,15 @@
       <div class="card-body">
           <h1 class="mb-4">Register</h1>
           <form #f="ngForm" (ngSubmit)="onRegister(f.value)">
+            <div style="margin:0 auto;">
+              <canvas #canvas></canvas>
+            </div>
+            <div class="form-group">
+                <div class="custom-file">
+                    <input type="file" required (change)="onFileSelected($event,canvas)" id="upload-file" name="profilePic" class="custom-file-input" accept="image/*">
+                    <label for="upload-file" class="custom-file-label">Choose Profile Picture</label>
+                </div>
+              </div>
             <div class="form-group">
               <label for="name">Name</label>
               <input name="name" [(ngModel)]="registerForm.name" #name="ngModel" 

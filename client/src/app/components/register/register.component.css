@@ -1,0 +1,12 @@
+canvas{
+    padding: 0;
+    margin: auto;
+    display: block;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: #ccc;
+}
+input[type=file]{
+    cursor: pointer;
+}

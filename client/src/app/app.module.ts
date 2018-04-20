@@ -28,7 +28,7 @@ const routes: Routes = [
   { path: 'clients/new', component: AddClientComponent, canActivate: [AuthGuard]},
   { path: 'clients/edit/:id', component: EditClientComponent, canActivate: [AuthGuard]},
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent}
+  { path: 'register', component: RegisterComponent},
 ]
 
 @NgModule({
@@ -43,7 +43,7 @@ const routes: Routes = [
     EditClientComponent,
     ClientDetailsComponent,
     HomeComponent,
-    SpinnerComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,

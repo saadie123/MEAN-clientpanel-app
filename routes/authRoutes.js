@@ -1,5 +1,7 @@
+const fs = require('fs');
 const express = require('express');
 const bcrypt = require('bcryptjs');
+const multer = require('multer');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
@@ -29,7 +31,8 @@ router.get('/success', (req, res) => {
     }
     let user = {
         name: req.user.name,
-        email: req.user.email
+        email: req.user.email,
+        profilePic: req.user.profilePic
     };
     res.status(200).send({user, message: 'You are successfully logged in!', success: true});
 });
@@ -86,7 +89,20 @@ router.post('/login', passport.authenticate('local', {
     failureRedirect: '/auth/fail'
 }));
 
-router.post('/register', async (req, res) => {
+const storage = multer.diskStorage({
+    destination: function(req, file, cb){
+        const dir = './public/uploads';
+        if (!fs.existsSync(dir)){
+            fs.mkdirSync(dir);
+        }
+        cb(null, dir);
+    },
+    filename: function(req, file, cb){
+        cb(null,Date.now() + file.originalname);
+    }
+});
+const upload = multer({storage});
+router.post('/register',upload.single('profilePic'), async (req, res) => {
     const user = await User.findOne({email: req.body.email});
     if(!user){
         bcrypt.genSalt(10, (err, salt) => {
@@ -98,7 +114,8 @@ router.post('/register', async (req, res) => {
                     const user = new User({
                         name: req.body.name,
                         email: req.body.email,
-                        password: hash
+                        password: hash,
+                        profilePic: req.file.filename
                     });
                     const newUser = await user.save();
                     res.status(201).send({ user:newUser, message: 'You are registered successfully. Please login now!', success:true })
@@ -108,6 +125,10 @@ router.post('/register', async (req, res) => {
             });
         });
     } else{
+        const file = './public/uploads/'+req.file.filename;
+        if(fs.exists(file)){
+            fs.unlink(file);
+        }
         return res.status(400).send({ message: 'An account is already registered with this email!', success: false });
     }
 });
@@ -118,7 +139,8 @@ router.get('/current-user', (req, res) => {
     }
     let user = {
         name: req.user.name,
-        email: req.user.email
+        email: req.user.email,
+        profilePic: req.user.profilePic
     };
     res.send({user, success: true});
 });
